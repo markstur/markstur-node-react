@@ -35,8 +35,8 @@ describe('project.service', () => {
       consumer: consumerName,
       provider: providerName,
       port,
-      log: resolve(process.cwd(), "logs", "pact.log"),
-      dir: resolve(process.cwd(), "pacts"),
+      log: resolve(process.cwd(), "..", "logs", "pact.log"),
+      dir: resolve(process.cwd(), "..", "pacts"),
     });
     console.log("in before all, provider setup");
     return provider.setup();

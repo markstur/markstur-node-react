@@ -8,15 +8,15 @@ const pactBroker = process.env.PACTBROKER_URL;
 
 async function publishPact() {
 
-  if (!pactBroker) {
-    console.log('No pact broker configured...');
-    return;
-  }
-
   const pactFiles = await listPactFiles(path.join(__dirname, '../pacts'));
 
   if (pactFiles.length == 0) {
     console.log('No pact files in pact directory: ' + path.join(__dirname, '../pacts'));
+    return;
+  }
+
+  if (!pactBroker) {
+    console.log('No pact broker configured...');
     return;
   }
 
