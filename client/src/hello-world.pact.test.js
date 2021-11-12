@@ -28,7 +28,7 @@ describe('project.service', () => {
   });
 
   const port = 3000;
-  let provider: Pact;
+  let provider;
   beforeAll(() => {
     provider = new Pact({
       cors: true,
@@ -58,7 +58,7 @@ describe('project.service', () => {
 
     describe('when called', () => {
       
-      const expectedResult: string = "Hello, World!";
+      const expectedResult = "Hello, World!";
       beforeEach(() => {
         console.log("in before each"+ provider.server);
         return provider.addInteraction({
