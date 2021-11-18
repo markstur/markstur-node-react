@@ -15,18 +15,21 @@
 
 
 var app = require('../server/server'),
-    expect = require('chai'),
+    expect = require('jest'),
     supertest = require('supertest')(app);
 const assert = require('assert');
 
 
-var expect = require('chai').expect;
+var expect = require('jest').expect;
 var http = require('http');
 
 // Below code demonstrates using various methods of testing
 describe('Testing Server', function() {
   let test_server;
-  this.timeout(0);
+
+   afterAll(async () => {
+          await app.close((err) => { console.log('server closed') })
+   });
 
   it('Public endpoint returns "Hello!"', function(done){
 
