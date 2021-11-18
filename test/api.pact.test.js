@@ -373,18 +373,6 @@ const providerPort = 3001;
       })
     });
 
-    describe("GET / not sent to proxy", () => {
-      it("should return web page without going to proxy provider", async () => {
-        // NOT USING /api to verify this server request should not affect provider.verify()
-        await supertest(app)
-            .get("/")
-            .expect(200)
-            .then((response) => {
-              expect(response.text).toContain('sad-cloud');
-            })
-      })
-    });
-
     describe("GET /foo", async () => {
       it("should return web page without going to proxy provider", async () => {
         // NOT USING /api again to verify /foo does not go to the proxy
