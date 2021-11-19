@@ -105,7 +105,10 @@ const providerPort = 3001;
         withRequest: {
           method: 'POST',
           path: '/graphql',
-          data: '{"query":"query ExampleQuery { projects { id, name, tasks { id } }}"}'
+          body: { "query": "{ projects { id, name, tasks { id } }}"},
+          headers: {
+            "content-type" : "application/json",
+          },
         },
         willRespondWith: {
           status: 200,
@@ -177,10 +180,6 @@ const providerPort = 3001;
         },
         willRespondWith: {
           status: 400,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
-          body: { value: 'nulla' }
         }
       }),
 
@@ -400,6 +399,7 @@ const providerPort = 3001;
 
         await supertest(app)
             .post("/api/graphql")
+            .set('content-type', 'application/json')
             .send( { query })
             .expect(200)
             .then((response) => {
