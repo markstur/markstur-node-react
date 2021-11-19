@@ -14,6 +14,7 @@ async function publishPact() {
     console.log('No pact files in pact directory: ' + path.join(__dirname, '../pacts'));
     return;
   }
+  console.log("pact files: ", pactFiles);
 
   if (!pactBroker) {
     console.log('No pact broker configured...');
