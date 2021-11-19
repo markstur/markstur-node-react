@@ -62,8 +62,8 @@ const providerPort = 3001;
       consumer: consumerName,
       provider: providerName,
       port: providerPort,
-      log: resolve(process.cwd(), "..", "logs", "pact.log"),
-      dir: resolve(process.cwd(), "..", "pacts"),
+      log: resolve(process.cwd(), "logs", "pact.log"),
+      dir: resolve(process.cwd(), "pacts"),
     });
     await provider.setup();
     console.log("in before all, provider setup for all");
