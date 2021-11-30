@@ -4,9 +4,9 @@ import supertest from 'supertest';
 import server from '../server/server';
 
 const app = server;
-const consumerName = 'markstur-calculator-api-consumer';
-const providerName = 'markstur-api-provider';
-const providerPort = 3001;
+const consumerName = 'markstur-calculator-ui';
+const providerName = 'markstur-calculator';
+const providerPort = 3002;
 
 describe('canary test', () => {
     it('should verify test infrastructure', () => {
@@ -103,10 +103,15 @@ describe('express server with api proxy to calculator provider', () => {
      for a div operation with parameters "LX, III, II), then expected result should be XV : 60(LX) / 3(III) / 2(II) = 10(X)
      so to add numbers 12 and 6 the URL would look like https://myapp.com/add?operands=XII,VI
 
-     the calculator should only handle 0 or positive numbers up to and including 3999 (MMMCMXCIX) if either of the operands is negative or over 3999 then the API should return HTTP error code 400 - Bad Request. If the calculated result is negative or over 3999 then the API should return an error code 501 - Not Implemented.
+     the calculator should only handle 0 or positive numbers up to and including 3999 (MMMCMXCIX)
+     if either of the operands is negative or over 3999 then the API should return HTTP error code 400 - Bad Request.
+
+     If the calculated result is negative or over 3999 then the API should return an error code 501 - Not Implemented.
 
      any invalid Roman Numeral input, such as XIIII instead of XIV, should return HTTP status code of 400 - Bad Request
+
      the API should handle Roman Numerals in upper, lower or mixed case letters
+
      for division the result should be returned as the integer result of the division. If the division result is not an exact integer (there is a remainder) then the result should be given in format <div result> (<modulus result>/divisor), so div(X, V) will return II, and div(XI, IV) will return II (III/IV)
      If there are more than 2 parameters you need to work out the remainder, to make the divisor is the smallest possible integer
      div(XX, II, III) should return III (I/III) : 20/2 = 10; 10 / 3 = 3
