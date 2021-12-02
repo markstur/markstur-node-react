@@ -43,10 +43,7 @@ const providerPort = 3003;
         },
         willRespondWith: {
           status: 200,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
-          body: { value: 'MMXXI' }
+          body: 'MMXXI'
         }
       }),
 
@@ -60,10 +57,7 @@ const providerPort = 3003;
         },
         willRespondWith: {
           status: 200,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
-          body: { value: 'nulla' }
+          body: 'nulla'
         }
       }),
 
@@ -77,10 +71,7 @@ const providerPort = 3003;
         },
         willRespondWith: {
           status: 200,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
-          body: { value: 'MMMCMLCXLIX' }
+          body: 'MMMCMXCIX'
         }
       }),
 
@@ -107,9 +98,6 @@ const providerPort = 3003;
         },
         willRespondWith: {
           status: 400,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
         }
       }),
 
@@ -123,9 +111,6 @@ const providerPort = 3003;
         },
         willRespondWith: {
           status: 400,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
         }
       }),
 
@@ -139,9 +124,6 @@ const providerPort = 3003;
         },
         willRespondWith: {
           status: 400,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
         }
       }),
 
@@ -155,9 +137,6 @@ const providerPort = 3003;
         },
         willRespondWith: {
           status: 400,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
         }
       }),
 
@@ -171,10 +150,7 @@ const providerPort = 3003;
         },
         willRespondWith: {
           status: 200,
-          headers: {
-            "content-type" : "application/json; charset=utf-8",
-          },
-          body: { value: 2021 }
+          body: '2021'
         }
       }),
 
@@ -193,54 +169,46 @@ const providerPort = 3003;
       it('The result of the conversion should be placed in the body of the reply.', async () => {
         await supertest(app)
             .get("/api/converter/to-roman?value=2021")
-            .set('Accept', 'application/json')
             .expect(200)
             .then((response) => {
-              expect(response.body.value).toEqual('MMXXI');
+              expect(response.text).toEqual('MMXXI');
             })
       });
       it('handle positive integers between 0 and 3999 inclusive', async () => {
         await supertest(app)
             .get("/api/converter/to-roman?value=0")
-            .set('Accept', 'application/json')
             .expect(200)
             .then((response) => {
-              expect(response.body.value).toEqual('nulla');
+              expect(response.text).toEqual('nulla');
             })
 
         await supertest(app)
             .get("/api/converter/to-roman?value=3999")
-            .set('Accept', 'application/json')
             .expect(200)
             .then((response) => {
-              expect(response.body.value).toEqual('MMMCMLCXLIX');
+              expect(response.text).toEqual('MMMCMXCIX');
             })
       });
 
       it('return HTTP error code 400 - Bad Request if the number is negative, above 3999 or contains a floating point number', async () => {
         await supertest(app)
             .get("/api/converter/to-roman?value=-1")
-            .set('Accept', 'application/json')
             .expect(400)
         await supertest(app)
             .get("/api/converter/to-roman?value=4000")
-            .set('Accept', 'application/json')
             .expect(400)
         await supertest(app)
             .get("/api/converter/to-roman?value=12.34")
-            .set('Accept', 'application/json')
             .expect(400)
       });
       it('when converting from Roman Numerals if the value if not a valid Roman Numeral, such as XIIII, then return HTTP error code 400 - Bad Request', async () => {
         await supertest(app)
             .get("/api/converter/to-number?value=XIIII")
-            .set('Accept', 'application/json')
             .expect(400)
       });
       it('when converting to a Roman Numerals, if the value parameter is not a valid number then return HTTP error code 400 - Bad Request', async () => {
         await supertest(app)
             .get("/api/converter/to-roman?value=foo")
-            .set('Accept', 'application/json')
             .expect(400)
       });
     });
@@ -253,7 +221,7 @@ const providerPort = 3003;
             .get("/api/converter/to-roman?value=2021")
             .expect(200)
             .then((response) => {
-              expect(response.body.value).toEqual('MMXXI');
+              expect(response.text).toEqual('MMXXI');
             })
       })
     });
@@ -264,7 +232,7 @@ const providerPort = 3003;
             .get("/api/converter/to-number?value=MMXXI")
             .expect(200)
             .then((response) => {
-              expect(response.body.value).toEqual(2021);
+              expect(response.text).toEqual('2021');
             })
       })
     });
