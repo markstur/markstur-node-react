@@ -9,6 +9,10 @@ module.exports = function(app){
   app.use('/api', proxy(calculatorHost, {
     filter: (req) => { 
       return Promise.resolve(req.url.startsWith('/calculator'))
+    },
+    proxyReqPathResolver: (req) => {
+      // The Calculator app has its /health as a root URL (not under /calculator)
+      return req.url.replace('/calculator/health', '/health')
     }
   }));
 
