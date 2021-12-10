@@ -1,0 +1,109 @@
+/* CSS Reset */
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 60%;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+    font-family: inherit;
+}
+
+:root {
+    --color-white: #fff;
+    --color-light-white: #eee;
+    --color-foo: rgba(27, 24, 88, 0.5);
+    --color-blue2-transparent: rgba(27, 24, 88, 0.9);
+    --color-blue1-transparent: rgba(14, 142, 216, 0.9);
+    --color-orange: #ff3c00;
+    --light-black: #222;
+    --color-black: #000;
+    --shadow: rgba(0, 0, 0, .4)
+}
+
+.app {
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to bottom right, var(--color-blue1-transparent), var(--color-blue2-transparent)), url(https://openclipart.org/download/232705/clock.svg);
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    height: 40vh;
+    width: 80%;
+    box-shadow: 0 2rem 4rem var(--shadow);
+    background-color: var(--color-light-black);
+  }
+
+.result-screen {
+    height: 19vh;
+    font-size: 8rem;
+    font-weight: 600;
+    /* To display the value at the bottom-right of the container */
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.computation-screen {
+    height: 6vh;
+    font-size: 2.5rem;
+    
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.screen {
+    height: 25vh;
+    width: 100%;
+    padding: 0 2rem;
+    overflow: hidden;
+    white-space: no-wrap;
+    color: var(--color-light-white);
+    background-color: var(--color-foo);
+}
+
+.keypad__row {
+  height: 11vh; /* (80vh calculator - 25vh screen) / 5 keypadRow components = 11vh */
+  width: 100%;
+  display: flex; /* To control the dimension */
+  color: white;
+}
+
+.keypad {
+  height: 55vh;
+  width: 100%;
+}
+
+.btn {
+  width: 25%;
+  height: 100%;
+  font-size: 3rem;
+  font-family: inherit;
+  background-color: var(--color-white);
+  border: 1px solid transparent;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all .2s;
+}
+.btn:hover {
+  color: var(--color-light-white);
+  background-color: var(--color-foo);
+}
+.btn:active {
+  transform: scale(.95);
+}
+
