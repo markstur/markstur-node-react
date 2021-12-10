@@ -6,7 +6,7 @@ import server from '../server/server';
 const app = server;
 const consumerName = 'markstur-calculator-ui';
 const providerName = 'markstur-calculator';
-const providerPort = 3002;
+const providerPort = +process.env.CALCULATOR_PORT || 3002;
 
 const smoothOperators = ['add', 'sub', 'mult', 'div'];
 const badOperator = 'bogus';
@@ -24,13 +24,13 @@ const provider = new Pact({
 
 describe("Calculator Pact test", () => {
 
-    beforeAll(() => provider.setup());
+    beforeAll(async () => {
+        await provider.setup();
+      });
     afterEach(() => provider.verify());
     afterAll(async () => {
         await provider.finalize();
-        await server.close((err) => {
-            console.log('server closed')
-        })
+        await app.close();
     });
 
     describe('given server requests to the calculator API provider via express.proxy', () => {
