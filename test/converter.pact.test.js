@@ -6,7 +6,7 @@ const app = server;
 
 const consumerName = 'markstur-converter-ui';
 const providerName = 'markstur-converter';
-const providerPort = 3003;
+const providerPort = +process.env.CONVERTER_PORT || 3003;
 
   describe('canary test', () => {
     it('should verify test infrastructure', () => {
@@ -32,7 +32,7 @@ const providerPort = 3003;
 
     console.log("Adding provider interactions beforeAll tests");
     const baseState = 'base state';
-    return Promise.all([
+    await Promise.all([
       provider.addInteraction({
         state: baseState,
         uponReceiving: 'a request to convert to-roman from 2021',

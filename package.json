@@ -11,10 +11,11 @@
     "start": "node server/server.js",
     "start:dev": "cd client && npm start",
     "debug": "chmod +x run-debug && ./run-debug",
-    "test": "npm run test:client && npm run test:server",
+    "test": "npm run test:server",
+    "test:both": "npm run test:client && npm run test:server",
     "test:client": "cd client && npm test",
     "test:server": "jest test/ --verbose --runInBand",
-    "test:pact-only": "cd test && jest api.pact.test.js --runInBand",
+    "test:pact-only": "cd test && jest calculator.pact.test.js --runInBand",
     "tdd": "cd client && npm run tdd",
     "dev": "nodemon server/server.js",
     "build": "cd client && npm run build",
@@ -34,6 +35,7 @@
   "author": "IBM Garage for Cloud",
   "license": "Apache-2.0",
   "dependencies": {
+    "@babel/runtime": "^7.16.3",
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.3",
@@ -42,6 +44,9 @@
     "log4js": "^3.0.5"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.16.4",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-typescript": "^7.16.0",
     "@pact-foundation/pact": "^9.16.5",
     "@types/jest": "^24.0.21",
     "@types/node": "^11.13.19",
