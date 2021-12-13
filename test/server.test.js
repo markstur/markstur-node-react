@@ -28,7 +28,7 @@ describe('Testing Server', function() {
   let test_server;
 
    afterAll(async () => {
-          await app.close((err) => { console.log('server closed') })
+          await app.close();
    });
 
   it('Public endpoint returns "Hello!"', function(done){
