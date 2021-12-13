@@ -14,7 +14,7 @@
     "test": "npm run test:server",
     "test:both": "npm run test:client && npm run test:server",
     "test:client": "cd client && npm test",
-    "test:server": "jest test/ --verbose --runInBand",
+    "test:server": "jest test/ --coverage --verbose --runInBand",
     "test:pact-only": "cd test && jest calculator.pact.test.js --runInBand",
     "tdd": "cd client && npm run tdd",
     "dev": "nodemon server/server.js",
@@ -28,9 +28,9 @@
     "push:only": "./scripts/publish.sh $npm_package_org $npm_package_name $npm_package_version",
     "pull": "./scripts/pull.sh $npm_package_org $npm_package_name $npm_package_version",
     "start:image": "docker run -p 3001:3000 $npm_package_name:$npm_package_version ",
-    "test:coverage": "cd client && npm run test:coverage",
+    "test:coverage:client": "cd client && npm run test:coverage",
     "pact:publish": "node test/pact-publish",
-    "sonarqube:scan": "npm run test:coverage && node test/sonarqube-scan"
+    "sonarqube:scan": "npm run test && node test/sonarqube-scan"
   },
   "author": "IBM Garage for Cloud",
   "license": "Apache-2.0",
