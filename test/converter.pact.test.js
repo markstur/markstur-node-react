@@ -160,7 +160,7 @@ const providerPort = +process.env.CONVERTER_PORT || 3003;
 
   afterAll(async () => {
         console.log("in afterAll, going to close and finalize");
-        await server.close((err) => { console.log('server closed') })
+        await server.close();
         await provider.verify().finally(provider.finalize());
   });
 
@@ -237,7 +237,7 @@ const providerPort = +process.env.CONVERTER_PORT || 3003;
       })
     });
 
-    describe("GET /api/converter/foo", async () => {
+    describe("GET /api/converter/foo", () => {
       it("should return web page without going to proxy provider", async () => {
         // NOT USING /api again to verify /foo does not go to the proxy
         await supertest(app)
