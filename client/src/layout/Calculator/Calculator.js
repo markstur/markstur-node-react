@@ -3,6 +3,8 @@ import React from 'react';
 import Screen from './Screen/Screen';
 import Keypad from './Keypad/Keypad';
 
+const EMPTY = '🧮';
+const DEL = '🔙';
 const operations = {
     '+': 'add',
     '-': 'sub',
@@ -13,16 +15,21 @@ const operations = {
 class Calculator extends React.Component {
     state = {
         equation: '',
-        result: 0
+        result: EMPTY 
     }
 
     onButtonPress = event => {
       let equation = this.state.equation;
       const pressedButton = event.target.innerHTML;
+      if (['+', '-', '*', '/'].some(o=>equation.includes(o)) && pressedButton != DEL) {
+        this.clear();
+        equation = '';
+      }
       if ([',', 'M', 'D', 'C', 'L', 'X', 'V', 'I'].indexOf(pressedButton) !== -1) equation += pressedButton;
-      else if (pressedButton === '␀') equation += pressedButton;
+      else if (pressedButton === '␀') equation += 'nulla';
       else if (['+', '-', '*', '/'].indexOf(pressedButton) !== -1) {
         const operation = operations[pressedButton];
+        equation.trimRight(',');
         const url = `/api/calculator/${operation}?operands=${equation}`;
         try {
           fetch(url)
@@ -31,26 +38,25 @@ class Calculator extends React.Component {
               statusText: res.statusText,
               text: await res.text()
             })).then(({ status, statusText, text }) => {
-              console.log(status); // this is the status code
-              console.log(text);   // this is json body 
               if (status === 200) this.setState({result: text});
               else this.setState({result: statusText});
             });
         } catch (error) {
           alert('ERROR');
         }
-        equation += ' ' + pressedButton + ' ';
+        equation += ' ' + pressedButton;
       }
       else if (pressedButton === '🆑') return this.clear();
-      else { // delete
+      else { // delete (including white space padding around operators)
         equation = equation.substr(0, equation.length - 1);
         equation = equation.trim();
+        this.setState({result: EMPTY});
       }
                     
       this.setState({equation: equation});
     }
     clear() {
-      this.setState({equation: '', result: 0});
+      this.setState({equation: '', result: EMPTY});
     }
 
     render() {

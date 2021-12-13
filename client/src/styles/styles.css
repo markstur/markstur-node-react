@@ -31,7 +31,7 @@ body {
 .app {
     height: 100vh;
     width: 100%;
-    background-image: linear-gradient(to bottom right, var(--color-blue1-transparent), var(--color-blue2-transparent)), url(https://openclipart.org/download/232705/clock.svg);
+    background-image: linear-gradient(to bottom right, var(--color-blue1-transparent), var(--color-blue2-transparent)), url(../clock.svg);
     background-size: cover;
     display: flex;
     justify-content: center;

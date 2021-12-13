@@ -23,7 +23,7 @@ const keypad = (props) => (
       <Button onButtonPress={props.onButtonPress}>*</Button>
       <Button onButtonPress={props.onButtonPress}>/</Button>
       <Button onButtonPress={props.onButtonPress}> </Button>
-      <Button onButtonPress={props.onButtonPress}>&larr;</Button>
+      <Button onButtonPress={props.onButtonPress}>🔙</Button>
       <Button onButtonPress={props.onButtonPress}>🆑</Button>
     </KeypadRow>
     
